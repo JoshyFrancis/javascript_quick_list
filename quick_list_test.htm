@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Quick List Example</title>
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1,width=device-width" />
+    
+</head>
+<body>
+	<input type="text" placeholder="Type here to search" id="search">
+   <script src="quick_list.js"></script>
+    <script type="text/javascript" >
+         var quick_list1_1=new quick_list(document.getElementById('search'),{
+				url:'',  ajax_data:{param1:'something'},  id_column:'ID',  display_column:'Name',value_column:'Name'
+				, list_height:250,  min_search_length:0,  default_data:{ID: 3},highlight_tag:'<span style="font-weight:bold;">[content]</span>'
+				,online:false,dataset:[{ID:1,Name:'Value 1'} ,{ID:2,Name:'Value 2'},{ID:3,Name:'Value 3'}  ]
+			});
+		quick_list1_1.add_footer('<span style="font-weight: bold;  font-size: 16px;color: #32c5d2!important;"> Add Item</span> ',function(){
+			alert('ok');
+		});
+		quick_list1_1.on_select=function(data){
+				alert(data.ID + ' ' +data.Name);
+				 
+		};
+    </script>
+</body>
+</html>
