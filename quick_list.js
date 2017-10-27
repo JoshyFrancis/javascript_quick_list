@@ -1,4 +1,4 @@
-﻿/* Javascript quick_list -  v1.0 
+/* Javascript quick_list -  v1.0 
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
 */
@@ -384,7 +384,7 @@
 		this.highlight_tag=(conf.highlight_tag===undefined)?'<b>[content]</b>':conf.highlight_tag  ;
 		this.dataset=(conf.dataset===undefined)?[]:conf.dataset  ;
 		this.online=(conf.online===undefined)?true:conf.online  ;
-		this.replace_within_tags=function(str,find,replace){//replace_within_tags('<a href="javascript:;"> an example <span> another <b>exa</b>mple</span> </a>','exa','EXA');
+		this.replace_within_tags=function(str,find,replace,fun){//replace_within_tags('<a href="javascript:;"> an example <span> another <b>exa</b>mple</span> </a>','exa','EXA');
 				str=str+'';
 				find=(find+'').toLowerCase();
 				replace=replace+'';
@@ -409,7 +409,11 @@
 							temp+=c;				
 							if( find.substr(0,temp.length)==temp.toLowerCase()){
 									if(find.length==temp.length){
-										out+=replace;
+										if(fun && typeof(fun)==='function'){
+											out+=fun(replace,temp);
+										}else{
+											out+=replace;
+										}
 										temp='';
 									}
 							}else {
@@ -423,7 +427,7 @@
 				}
 					
 			}
-				return out;
+				return out+temp;
 		};
 		this.search_items=function(items){
 				this.dataset=items;
@@ -434,11 +438,34 @@
 			//var html='';
 			this.list.innerHTML='';
 			var cur_item=false;
+			var found=false;
 			for(var i=0;i<items.length;i++){
-						
-				var item=items[i][this.display_column] ;
+						if(this.online===false){
+								found=false;
+							for(var a in items[i]){
+								if( ( items[i][a]+'').toLowerCase().indexOf( this.el.value.toLowerCase())!=-1){
+									found=true;
+									break;
+								}
+							}
+								if(found==false){
+									continue;
+								}
+						}
+				//var item=items[i][this.display_column] ;
+					var item=this.display_column;
+							for(var a in items[i]){
+								var searchMask = a ;
+								var regEx = new RegExp(searchMask, "ig");
+								var replaceMask = items[i][a];
+
+								item = item.replace(regEx, replaceMask);
+
+							}
 							//item = item.replace(regEx, replaceMask);
-							item=this.replace_within_tags(item,this.el.value,replaceMask);
+							item=this.replace_within_tags(item,this.el.value,this.highlight_tag,function(highlight_tag,replace){
+									return highlight_tag.replace('[content]', replace);
+							});
 							
 				//html+='<a href="javascript:alert(\'ok\');" class="ql_item">'+ item +'</a>';
 				var a=document.createElement('a');
@@ -449,9 +476,6 @@
 							cur_item=true;
 						}
 						
-					if(i==items.length-1 && this.footer_content.childNodes.length>0){
-						a.style['border-bottom']='0px solid lightgray';
-					}
 					a.innerHTML=item;
 					a.href="javascript:;";
 					a.setAttribute('ql_data',JSON.stringify(items[i]));
@@ -468,6 +492,7 @@
 					a.onclick=_select;
 						if(cur_item==true){
 									this.selectedrowid=0;
+									a.style['font-weight']='bold';
 								if(this.list.childNodes.length==0){
 									this.list.appendChild	(a);
 								}else{
@@ -479,7 +504,14 @@
 						}
 			}
 			//this.list.innerHTML=html;
-			if(items.length>0 ){
+			if(this.list.childNodes.length >0 ){
+					if(  this.footer_content.childNodes.length>0){
+						//this.list.childNodes[this.list.childNodes.length -1].style['border-bottom']='0px solid lightgray';
+						this.list.lastChild.style['border-bottom']='0px solid lightgray';	
+					}
+					if(!this.list.firstChild.style['border-top']){
+						this.list.firstChild.style['border-top']=this.main_container.style['border-bottom'];	
+					}
 				this.show();
 				for( var i=this.search_callbacks.length-1;i>=0;i--){
 					this.search_callbacks[i](i);
