@@ -1,4 +1,4 @@
-/* Javascript quick_list -  v1.0 
+﻿/* Javascript quick_list -  v1.0 
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
 */
@@ -258,10 +258,12 @@
 		this.main_container=document.createElement('div');
 		this.insertAfter( this.main_container,this.el);
 		this.main_container.style.cssText='display:block;border: 0px solid rgb(231, 236, 241);width:100%;';
-			if(this.el.style['border-bottom']){
+			if(this.el.style['border-bottom'] && this.el.style['border-bottom'] !=''){
 				this.main_container.style['border-bottom']=this.el.style['border-bottom'];
+				this.main_container.style['border-top']=this.el.style['border-bottom'];
 			}else{
 				this.main_container.style['border-bottom']='1px solid lightgray';
+				this.main_container.style['border-top']='1px solid lightgray';
 			}
 		this.list_content=document.createElement('div');
 		this.main_container.appendChild	(this.list_content);
@@ -456,7 +458,7 @@
 					var item=this.display_column;
 							for(var a in items[i]){
 								var searchMask = a ;
-								var regEx = new RegExp(searchMask, "ig");
+								var regEx = new RegExp(searchMask, "g");
 								var replaceMask = items[i][a];
 
 								item = item.replace(regEx, replaceMask);
@@ -509,9 +511,9 @@
 						//this.list.childNodes[this.list.childNodes.length -1].style['border-bottom']='0px solid lightgray';
 						this.list.lastChild.style['border-bottom']='0px solid lightgray';	
 					}
-					if(!this.list.firstChild.style['border-top']){
-						this.list.firstChild.style['border-top']=this.main_container.style['border-bottom'];	
-					}
+					//if(!this.list.firstChild.style['border-top'] ){
+					//	this.list.firstChild.style['border-top']=this.main_container.style['border-bottom'];	
+					//}
 				this.show();
 				for( var i=this.search_callbacks.length-1;i>=0;i--){
 					this.search_callbacks[i](i);
