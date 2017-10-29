@@ -258,13 +258,7 @@
 		this.main_container=document.createElement('div');
 		this.insertAfter( this.main_container,this.el);
 		this.main_container.style.cssText='display:block;border: 0px solid rgb(231, 236, 241);width:100%;';
-			if(this.el.style['border-bottom'] && this.el.style['border-bottom'] !=''){
-				this.main_container.style['border-bottom']=this.el.style['border-bottom'];
-				this.main_container.style['border-top']=this.el.style['border-bottom'];
-			}else{
-				this.main_container.style['border-bottom']='1px solid lightgray';
-				this.main_container.style['border-top']='1px solid lightgray';
-			}
+			
 		this.list_content=document.createElement('div');
 		this.main_container.appendChild	(this.list_content);
 		this._list_height=(conf.list_height===undefined)?200:conf.list_height;
@@ -275,7 +269,13 @@
 		this.main_container.appendChild	(this.footer_content);
 		this.footer_content.style.cssText='display:block; width:100%; padding:0px;';
 		//this.footer_content.innerHTML='<a href="javascript:;" class="ql_item ql_item_no_border"  > <span style="font-weight: bold;  font-size: 16px;"> Add</span><br>test </a>';
-		
+			if(this.el.style['border-bottom'] && this.el.style['border-bottom'] !=''){
+				this.main_container.style['border-bottom']=this.el.style['border-bottom'];
+				this.list_content.style['border-top']=this.el.style['border-bottom'];
+			}else{
+				this.main_container.style['border-bottom']='1px solid lightgray';
+				this.list_content.style['border-top']='1px solid lightgray';
+			}
 		this.footer_links=[];
 		this.add_footer=this.__bind(this,function(caption,f){
 			var a=document.createElement('a');
@@ -386,6 +386,7 @@
 		this.highlight_tag=(conf.highlight_tag===undefined)?'<b>[content]</b>':conf.highlight_tag  ;
 		this.dataset=(conf.dataset===undefined)?[]:conf.dataset  ;
 		this.online=(conf.online===undefined)?true:conf.online  ;
+		this.allow_deselect=(conf.allow_deselect===undefined)?true:conf.allow_deselect  ;
 		this.replace_within_tags=function(str,find,replace,fun){//replace_within_tags('<a href="javascript:;"> an example <span> another <b>exa</b>mple</span> </a>','exa','EXA');
 				str=str+'';
 				find=(find+'').toLowerCase();
@@ -524,6 +525,7 @@
 		};
 		this.search=function(){
 				var value=this.el.value.replace(/\n/g,'').replace(/^ +| +$/gm, '');
+				
 				if(value.length< this.min_search_length){
 						return;
 				}
@@ -633,9 +635,24 @@
 						}
 			
 		});
+		this.check_deselect=function(){
+			if(this.allow_deselect===true){
+				var value=this.el.value.replace(/\n/g,'').replace(/^ +| +$/gm, '');
+					if(value==''){
+						this.cur_data[this.id_column]='';
+						if(this.on_select){
+							this.on_select(this.cur_data);
+						}
+					}
+			}
+		};
 		this._keyup=this.__bind(this,function(e){
 			//alert(e.keyCode);
 					 switch (e.keyCode) {
+							case 46: case 8: /*  delete or backspace*/
+									this.check_deselect();
+									this.search();
+								break;
 							case 9: case 13: /* TAB Key or Enter Key*/
 								break;
 							case 27:
@@ -652,6 +669,7 @@
 		});
 		this._paste=this.__bind(this,function(e){
 			var _callback=this.__bind(this,function(){
+					this.check_deselect();
 					this.search();
 				});
 			setTimeout(_callback , 0);
