@@ -640,6 +640,8 @@
 				var value=this.el.value.replace(/\n/g,'').replace(/^ +| +$/gm, '');
 					if(value==''){
 						this.cur_data[this.id_column]='';
+						this.cur_data[this.display_column]='';
+						this.cur_data[this.value_column]='';
 						if(this.on_select){
 							this.on_select(this.cur_data);
 						}
