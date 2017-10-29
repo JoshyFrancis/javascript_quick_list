@@ -387,6 +387,7 @@
 		this.dataset=(conf.dataset===undefined)?[]:conf.dataset  ;
 		this.online=(conf.online===undefined)?true:conf.online  ;
 		this.allow_deselect=(conf.allow_deselect===undefined)?true:conf.allow_deselect  ;
+		this.display_name_fields_in_brackets=(conf.display_name_fields_in_brackets===undefined)?false:conf.display_name_fields_in_brackets  ;
 		this.replace_within_tags=function(str,find,replace,fun){//replace_within_tags('<a href="javascript:;"> an example <span> another <b>exa</b>mple</span> </a>','exa','EXA');
 				str=str+'';
 				find=(find+'').toLowerCase();
@@ -458,12 +459,12 @@
 				//var item=items[i][this.display_column] ;
 					var item=this.display_column;
 							for(var a in items[i]){
-								var searchMask = a ;
-								var regEx = new RegExp(searchMask, "g");
-								var replaceMask = items[i][a];
+								var searchMask = this.display_name_fields_in_brackets!==true?a:'(' + a + ')' ;
+								//var regEx = new RegExp(searchMask, "g");
+								var replaceMask =  items[i][a]   ;
 
-								item = item.replace(regEx, replaceMask);
-
+								//item = item.replace(regEx, replaceMask);
+								 item = item.split(searchMask).join(replaceMask);
 							}
 							//item = item.replace(regEx, replaceMask);
 							item=this.replace_within_tags(item,this.el.value,this.highlight_tag,function(highlight_tag,replace){
