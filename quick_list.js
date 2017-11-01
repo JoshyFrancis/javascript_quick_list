@@ -678,10 +678,12 @@
 			setTimeout(_callback , 0);
 		});
 		this._focus=this.__bind(this,function(e){
+			if(this.search_visible==false){
 				var _callback=this.__bind(this,function(){
 					this.show();
 				});
 				this.find(this.cur_data[this.id_column],_callback);
+			}
 		});
 		this._blur=this.__bind(this,function(e){
 				e = e || window.event;
@@ -697,6 +699,7 @@
 		this.addEvent(this.el,'cut',this._paste);
 		this.addEvent(this.el,'paste',this._paste);
 		this.addEvent(this.el,'focus',this._focus);
+		 
 		this.addEvent(document,'click',this._blur);
 		return this;
 	}
