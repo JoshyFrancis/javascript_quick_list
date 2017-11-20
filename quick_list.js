@@ -508,6 +508,7 @@
 						}
 			}
 			//this.list.innerHTML=html;
+			 
 			if(this.list.childNodes.length >0 ){
 					if(  this.footer_content.childNodes.length>0){
 						//this.list.childNodes[this.list.childNodes.length -1].style['border-bottom']='0px solid lightgray';
@@ -517,12 +518,13 @@
 					//	this.list.firstChild.style['border-top']=this.main_container.style['border-bottom'];	
 					//}
 				this.show();
-				for( var i=this.search_callbacks.length-1;i>=0;i--){
-					this.search_callbacks[i](i);
-				}
+
 			}else{
 				this.hide();
 			}
+				for( var i=this.search_callbacks.length-1;i>=0;i--){
+					this.search_callbacks[i](i);
+				}			
 		};
 		this.search=function(){
 				var value=this.el.value.replace(/\n/g,'').replace(/^ +| +$/gm, '');
