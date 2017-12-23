@@ -1,8 +1,12 @@
-﻿/* Javascript quick_list -  
+﻿/* Javascript quick_list -  v1.0.08
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
-	Whats new in v1.0.07
-		*serve_cache - Ajax results can be cached
+		Whats new in v1.0.08
+				*Fixed a bug in search_items
+		Whats new in v1.0.07
+				*serve_cache - Ajax results can be cached
+				*repeated calling of search function is handled
+			
 */
 	function quick_list(el,conf){
 		"use strict";
@@ -458,6 +462,7 @@
 								this.dataset.push(items[i]);
 							}
 						}
+					items=this.dataset;
 				//var searchMask = this.el.value;
 				//var regEx = new RegExp(searchMask, "ig");
 				//var replaceMask = "<b>"+this.el.value+"</b>";
