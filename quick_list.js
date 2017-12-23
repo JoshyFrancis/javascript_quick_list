@@ -1,6 +1,8 @@
-﻿/* Javascript quick_list -  v1.0.09
+﻿/* Javascript quick_list -  v1.0.10
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
+		Whats new in v1.0.10
+				*added reset_cache function
 		Whats new in v1.0.09
 				*Fixed a bug with total_rows
 		Whats new in v1.0.08
@@ -398,6 +400,7 @@
 		this.highlight_tag=(conf.highlight_tag===undefined)?'<b>[content]</b>':conf.highlight_tag  ;
 		this.dataset=(conf.dataset===undefined)?[]:conf.dataset  ;
 		this.online=(conf.online===undefined)?true:conf.online  ;
+		this.online_prev=this.online;
 		this.allow_deselect=(conf.allow_deselect===undefined)?true:conf.allow_deselect  ;
 		this.serve_cache=(conf.serve_cache===undefined)?true:conf.serve_cache  ;
 		this.in_search=false;
@@ -556,6 +559,12 @@
 				for( var i=this.search_callbacks.length-1;i>=0;i--){
 					this.search_callbacks[i](i);
 				}			
+		};
+		this.reset_cache=function(){
+			this.in_search=false;
+			this.online=this.online_prev;
+			this.dataset=[];
+			this.total_rows=0;
 		};
 		this.search=function(){
 			if(this.in_search==true){
