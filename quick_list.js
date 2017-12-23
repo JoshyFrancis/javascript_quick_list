@@ -1,4 +1,4 @@
-﻿/* Javascript quick_list -  v1.0 
+﻿/* Javascript quick_list -  v1.0.07
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
 */
@@ -170,89 +170,92 @@
 				}
 			}
 		};
-		var css='';
-			css+='.ql_item, .ql_item:link, .ql_item:visited, .ql_item:focus, .ql_item:active {';	
-			css+='			border:0px;';	
-			css+='			border-bottom:1px solid lightgray;';	
-			css+='			border-left:1px solid lightgray;';	
-			css+='			border-right:1px solid lightgray;';	
-			css+='			border-radius:unset;';	
-			css+='			padding: 10px 15px;';	
-			css+='			display: block;';	
-			css+='			background-color: #fff;';	
-			css+='			text-decoration: none;';	
-			css+='			color:black;';	
-			css+='		}';	
-			css+='		.ql_item:hover{';	
-			css+='				background-color: #f5f5f5;';	
-			css+='				text-decoration: none;';	
-			css+='		}';	
-			css+='		.ql_item_no_border{';	
-			css+='			border:0px !important;';
-			css+='		}';	
-			css+='		.ql_item_border{';	
-			css+='			border-top:1px solid lightgray !important;';
-			css+='			border-bottom:0px solid lightgray !important;';
-			css+='		}';	
-			css+='		.ql_item_selected{';	
-			css+='			background-color:#3598dc!important;';	
-			css+='			color:white!important;';	
-			css+='		}';	
-			css+='		.ql_item_prev_selected{';	
-			css+='			background-color:lightgray!important;';	
-			css+='		}';	
-				css+='.whirl {';	
-				 css+='		position: relative; ';	
-				css+='  }';	
-				css+='.whirl:before {';	
-				css+='  content: "";';	
-				css+='  z-index: 100053;';	
-				css+='  position: absolute;';	
-				css+='  top: 0;';	
-				css+='  left: 0;';	
-				 css+=' display: block;';	
-				css+='  height: 100%;';	
-				css+='  width: 100%;';	
-				//css+='  background-color: #999;';	
-				//css+='  opacity: 0.6; ';	
-				css+='  }';	
-				css+='.whirl:after {';	
-				css+='  z-index: 100054;';	
-				css+='  content: "";';	
-				css+='  height: 30px;';	
-				css+='  width: 30px;';	
-				css+='  position: absolute;';	
-				css+='  top: 1%;';	
-				css+='  left: 50%;';	
-				//css+='  margin: -20px 0 0 -20px;';	
-				css+='  -webkit-transition: all .75s ease 0s;';	
-				css+='  transition: all .75s ease 0s;';	
-				css+='  border-radius: 100%;';	
-				 css+=' border-top: 4px solid #555;';	
-				css+='  -webkit-animation: standard .75s infinite linear;';	
-				css+='  animation: standard .75s infinite linear; ';	
-				css+='}';	
-				css+='.whirl.no-overlay:before {';	
-				css+='  content: none;';	
-				css+='  display: none; ';	
-				css+='}';	
-				css+='/* whirl standard rotation animation used for duo, double-up etc. */';	
-				css+='@-webkit-keyframes standard {';	
-				css+='  from {';	
-				css+='	-webkit-transform: rotate(0deg);';	
-				css+='	transform: rotate(0deg); }';	
-				css+='  to {';	
-				css+='	-webkit-transform: rotate(360deg);';	
-				css+='	transform: rotate(360deg); } }';	
-				css+='@keyframes standard {';	
-				css+='  from {';	
-				css+='	-webkit-transform: rotate(0deg);';	
-				css+='	transform: rotate(0deg); }';	
-				css+='  to {';	
-				css+='	-webkit-transform: rotate(360deg);';	
-				css+='	transform: rotate(360deg); } }';	
+		this.setup_style=function(){
+			var css='';
+				css+='.ql_item, .ql_item:link, .ql_item:visited, .ql_item:focus, .ql_item:active {';	
+				css+='			border:0px;';	
+				css+='			border-bottom:1px solid lightgray;';	
+				css+='			border-left:1px solid lightgray;';	
+				css+='			border-right:1px solid lightgray;';	
+				css+='			border-radius:unset;';	
+				css+='			padding: 10px 15px;';	
+				css+='			display: block;';	
+				css+='			background-color: #fff;';	
+				css+='			text-decoration: none;';	
+				css+='			color:black;';	
+				css+='		}';	
+				css+='		.ql_item:hover{';	
+				css+='				background-color: #f5f5f5;';	
+				css+='				text-decoration: none;';	
+				css+='		}';	
+				css+='		.ql_item_no_border{';	
+				css+='			border:0px !important;';
+				css+='		}';	
+				css+='		.ql_item_border{';	
+				css+='			border-top:1px solid lightgray !important;';
+				css+='			border-bottom:0px solid lightgray !important;';
+				css+='		}';	
+				css+='		.ql_item_selected{';	
+				css+='			background-color:#3598dc!important;';	
+				css+='			color:white!important;';	
+				css+='		}';	
+				css+='		.ql_item_prev_selected{';	
+				css+='			background-color:lightgray!important;';	
+				css+='		}';	
+					css+='.whirl {';	
+					 css+='		position: relative; ';	
+					css+='  }';	
+					css+='.whirl:before {';	
+					css+='  content: "";';	
+					css+='  z-index: 100053;';	
+					css+='  position: absolute;';	
+					css+='  top: 0;';	
+					css+='  left: 0;';	
+					 css+=' display: block;';	
+					css+='  height: 100%;';	
+					css+='  width: 100%;';	
+					//css+='  background-color: #999;';	
+					//css+='  opacity: 0.6; ';	
+					css+='  }';	
+					css+='.whirl:after {';	
+					css+='  z-index: 100054;';	
+					css+='  content: "";';	
+					css+='  height: 30px;';	
+					css+='  width: 30px;';	
+					css+='  position: absolute;';	
+					css+='  top: 1%;';	
+					css+='  left: 50%;';	
+					//css+='  margin: -20px 0 0 -20px;';	
+					css+='  -webkit-transition: all .75s ease 0s;';	
+					css+='  transition: all .75s ease 0s;';	
+					css+='  border-radius: 100%;';	
+					 css+=' border-top: 4px solid #555;';	
+					css+='  -webkit-animation: standard .75s infinite linear;';	
+					css+='  animation: standard .75s infinite linear; ';	
+					css+='}';	
+					css+='.whirl.no-overlay:before {';	
+					css+='  content: none;';	
+					css+='  display: none; ';	
+					css+='}';	
+					css+='/* whirl standard rotation animation used for duo, double-up etc. */';	
+					css+='@-webkit-keyframes standard {';	
+					css+='  from {';	
+					css+='	-webkit-transform: rotate(0deg);';	
+					css+='	transform: rotate(0deg); }';	
+					css+='  to {';	
+					css+='	-webkit-transform: rotate(360deg);';	
+					css+='	transform: rotate(360deg); } }';	
+					css+='@keyframes standard {';	
+					css+='  from {';	
+					css+='	-webkit-transform: rotate(0deg);';	
+					css+='	transform: rotate(0deg); }';	
+					css+='  to {';	
+					css+='	-webkit-transform: rotate(360deg);';	
+					css+='	transform: rotate(360deg); } }';	
 
-		this.addstyle('ql_item',css);
+			this.addstyle('ql_item',css);			
+		};
+		this.setup_style();
 		this.el=el;
 		this.el.setAttribute('autocomplete','off');
 		this.main_container=document.createElement('div');
@@ -387,6 +390,11 @@
 		this.dataset=(conf.dataset===undefined)?[]:conf.dataset  ;
 		this.online=(conf.online===undefined)?true:conf.online  ;
 		this.allow_deselect=(conf.allow_deselect===undefined)?true:conf.allow_deselect  ;
+		this.serve_cache=(conf.serve_cache===undefined)?true:conf.serve_cache  ;
+		this.in_search=false;
+		this.first_time=true;
+		this.total_rows_column=(conf.total_rows_column===undefined)?'total_rows':conf.total_rows_column  ; 
+		this.total_rows=0;
 		this.display_name_fields_in_brackets=(conf.display_name_fields_in_brackets===undefined)?false:conf.display_name_fields_in_brackets  ;
 		this.replace_within_tags=function(str,find,replace,fun){//replace_within_tags('<a href="javascript:;"> an example <span> another <b>exa</b>mple</span> </a>','exa','EXA');
 				str=str+'';
@@ -434,7 +442,20 @@
 				return out+temp;
 		};
 		this.search_items=function(items){
-				this.dataset=items;
+				//this.dataset=items;
+				var found=false;	
+						for(var i=0;i<items.length;i++){
+								found=false;	
+							for(var j=0;j<this.dataset.length;j++){
+								if( (items[i][this.id_column]+'').toLowerCase()==(this.dataset[j][this.id_column]+'').toLowerCase()){
+									found=true;	
+									break;
+								}
+							}
+							if(found==false){
+								this.dataset.push(items[i]);
+							}
+						}
 				//var searchMask = this.el.value;
 				//var regEx = new RegExp(searchMask, "ig");
 				//var replaceMask = "<b>"+this.el.value+"</b>";
@@ -527,9 +548,14 @@
 				}			
 		};
 		this.search=function(){
+			if(this.in_search==true){
+					return;
+			}
+			this.in_search=true;
 				var value=this.el.value.replace(/\n/g,'').replace(/^ +| +$/gm, '');
 				
 				if(value.length< this.min_search_length){
+						this.in_search=false;
 						return;
 				}
 			this.selectedrowid=-1;
@@ -540,18 +566,45 @@
 				if(this.online===false){
 					this.search_items(this.dataset);
 					this.list.className=this.list.className.replace('whirl','');
+					this.in_search=false;
 					return;
 				}
+				//	alert(JSON.stringify(this.dataset));
+				var id_exclude=[];
+						//id_exclude.push(0);
+							for(var j=0;j<this.dataset.length;j++){
+								id_exclude.push(this.dataset[j][this.id_column]);
+							}						
+					if(this.serve_cache==true && this.dataset.length>0){
+						this.search_items(this.dataset);
+							if(this.dataset.length>=this.total_rows){
+								this.list.className=this.list.className.replace('whirl','');
+								this.in_search=false;
+								return;
+							}
+					}
+					this._ajax_data.id_exclude=id_exclude.join(',');
+					this._ajax_data.total_rows_column=this.total_rows_column;
+					this._ajax_data.first_time=this.first_time;
+					
+					
 			this.ajax({
 					url: this.url,
 					type: this.type,
 					data:this._ajax_data,
 					success:this.__bind( this,function (data,xhr) {
+							this.in_search=false;
 							try{
 								var items=JSON.parse(data);
+								
+								if(items.length>0){
+									if(this.first_time==true){
+										this.total_rows=isNaN(parseInt(items[0][this.total_rows_column]))?this.total_rows:parseInt(items[0][this.total_rows_column]);
+									}
 									
-								this.search_items(items);
-									
+									this.search_items(items);
+											
+								}
 							}catch(e){
 								//alert(xhr.responseText);
 								if(this.on_error){
@@ -562,9 +615,13 @@
 							 
 							this.list.className=this.list.className.replace('whirl','');
 							//this.el.className=this.el.className.replace('whirl','');
+							
+							this.first_time=false;
+					
 					}),
 					error:this.__bind(this, function (xhr, e) {
 						//alert(xhr.responseText);
+						this.in_search=false;
 						if(this.on_error){
 							this.on_error(xhr.responseText,xhr);
 						}
