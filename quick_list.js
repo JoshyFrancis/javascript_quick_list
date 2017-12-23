@@ -1,8 +1,11 @@
-﻿/* Javascript quick_list -  v1.0.08
+﻿/* Javascript quick_list -  v1.0.09
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
+		Whats new in v1.0.09
+				*Fixed a bug with total_rows
 		Whats new in v1.0.08
 				*Fixed a bug in search_items
+				* 
 		Whats new in v1.0.07
 				*serve_cache - Ajax results can be cached
 				*repeated calling of search function is handled
@@ -587,6 +590,7 @@
 							if(this.dataset.length>=this.total_rows){
 								this.list.className=this.list.className.replace('whirl','');
 								this.in_search=false;
+								this.online=false;
 								return;
 							}
 					}
