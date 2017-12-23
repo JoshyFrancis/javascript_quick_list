@@ -1,6 +1,8 @@
-﻿/* Javascript quick_list -  v1.0.07
+﻿/* Javascript quick_list -  
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
+	Whats new in v1.0.07
+		*serve_cache - Ajax results can be cached
 */
 	function quick_list(el,conf){
 		"use strict";
