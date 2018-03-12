@@ -1,6 +1,13 @@
-﻿/* Javascript quick_list -  v1.0.10
+﻿/* Javascript quick_list -  v1.0.12
 * Copyright (c) 2017 Joshy Francis
 * designed for Material Design
+
+
+		Whats new in v1.0.12
+				*corrected bug in search added this.dataset=[];
+
+		Whats new in v1.0.11
+				*serve_cache default will be false;
 		Whats new in v1.0.10
 				*added reset_cache function
 		Whats new in v1.0.09
@@ -402,7 +409,7 @@
 		this.online=(conf.online===undefined)?true:conf.online  ;
 		this.online_prev=this.online;
 		this.allow_deselect=(conf.allow_deselect===undefined)?true:conf.allow_deselect  ;
-		this.serve_cache=(conf.serve_cache===undefined)?true:conf.serve_cache  ;
+		this.serve_cache=(conf.serve_cache===undefined)?false:conf.serve_cache  ;
 		this.in_search=false;
 		this.first_time=true;
 		this.total_rows_column=(conf.total_rows_column===undefined)?'total_rows':conf.total_rows_column  ; 
@@ -455,6 +462,7 @@
 		};
 		this.search_items=function(items){
 				//this.dataset=items;
+				
 				var found=false;	
 						for(var i=0;i<items.length;i++){
 								found=false;	
@@ -465,6 +473,7 @@
 								}
 							}
 							if(found==false){
+							 
 								this.dataset.push(items[i]);
 							}
 						}
@@ -594,7 +603,7 @@
 							for(var j=0;j<this.dataset.length;j++){
 								id_exclude.push(this.dataset[j][this.id_column]);
 							}						
-					if(this.serve_cache==true && this.dataset.length>0){
+					if(this.serve_cache===true && this.dataset.length>0){
 						this.search_items(this.dataset);
 							if(this.dataset.length>=this.total_rows){
 								this.list.className=this.list.className.replace('whirl','');
@@ -621,7 +630,7 @@
 									if(this.first_time==true){
 										this.total_rows=isNaN(parseInt(items[0][this.total_rows_column]))?this.total_rows:parseInt(items[0][this.total_rows_column]);
 									}
-									
+									this.dataset=[];
 									this.search_items(items);
 											
 								}
