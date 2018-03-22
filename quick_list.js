@@ -1,11 +1,15 @@
-﻿/* Javascript quick_list -  v1.0.12
-* Copyright (c) 2017 Joshy Francis
-* designed for Material Design
+﻿	 /* 				All Thanks and Praise to My Lord Jesus Christ
+	  * 				All Thanks and Praise to My Lord Jesus Christ
+	  * 				All Thanks and Praise to My Lord Jesus Christ
+	  * 
+		*  Javascript quick_list -  v1.0.13
+		* Copyright (c) 2018 Joshy Francis
+		* designed for Material Design
 
-
+		Whats new in v1.0.13
+				*added on_before_ajax event
 		Whats new in v1.0.12
-				*corrected bug in search added this.dataset=[];
-
+				*fixed a bug in search added this.dataset=[];
 		Whats new in v1.0.11
 				*serve_cache default will be false;
 		Whats new in v1.0.10
@@ -616,7 +620,9 @@
 					this._ajax_data.total_rows_column=this.total_rows_column;
 					this._ajax_data.first_time=this.first_time;
 					
-					
+					if (this.on_before_ajax) {
+						this.on_before_ajax(this._ajax_data);
+					}
 			this.ajax({
 					url: this.url,
 					type: this.type,
